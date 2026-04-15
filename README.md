@@ -1,57 +1,147 @@
-# 📚 DOCGENCE – AI Book Search with Explainable AI
+# 🚀 DOCGENCE — AI Book Search Engine
 
-DOCGENCE is an AI-powered semantic book search system that uses vector embeddings and explainable AI to return meaningful search results.
-
----
-
-## 🚀 Features
-
-- 🔍 Semantic Search (not keyword-based)
-- 🧠 Explainable AI insights (why results matched)
-- ⚡ Fast retrieval using FAISS
-- 🎨 Modern React UI with glassmorphism
-- 📖 Real book covers via Google Books API
-- 📊 Ranking system based on similarity score
+DOCGENCE is an AI-powered semantic book search engine that uses embeddings, FAISS, and Explainable AI (XAI) to retrieve and rank relevant books based on meaning, not just keywords.
 
 ---
 
-## 🏗️ Tech Stack
+## 🔥 Features
 
-### Backend
-- Django REST Framework
-- Sentence Transformers (`all-MiniLM-L6-v2`)
-- FAISS (Vector Search)
-
-### Frontend
-- React (Vite)
-- CSS (Glassmorphism UI)
+* 🔍 Semantic Search (not keyword-based)
+* ⚡ Fast similarity search using FAISS
+* 🧠 Explainable AI (XAI) insights for each result
+* 🎨 Modern UI with React (glassmorphism + animations)
+* 📊 Ranking system with similarity scores
+* 📖 Expandable descriptions (Read More / Less)
 
 ---
 
-## 🧠 How It Works
+## 🛠️ Tech Stack
 
-1. Books are converted into vector embeddings
-2. User query is also converted into embedding
-3. FAISS finds nearest vectors (similar books)
-4. Results are ranked by similarity score
-5. Explainable AI provides reasoning for matches (USP)
+* **Backend:** Django, Django REST Framework
+* **AI Engine:** Sentence Transformers, FAISS
+* **Frontend:** React (Vite)
+* **Database:** SQLite
 
 ---
 
-## 📸 Screenshots
+## 📂 Project Structure
 
-- Semantic Search Results
-- Ranking + Score
-- Explainable AI Insights
-- Real Book Covers
+```
+docgence-ai-search/
+│
+├── backend/        # Django backend
+├── frontend/       # React frontend
+├── ai_engine/      # RAG + FAISS logic
+├── README.md
+├── requirements.txt
+└── .gitignore
+```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### Backend
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/docgence-ai-search.git
+cd docgence-ai-search
+```
+
+---
+
+## 🔧 Backend Setup (Django)
 
 ```bash
 cd backend
-pip install -r requirements.txt
+
+# Create virtual environment
+python -m venv venv
+
+# Activate
+venv\Scripts\activate     # Windows
+# source venv/bin/activate  # Mac/Linux
+
+# Install dependencies
+pip install -r ../requirements.txt
+
+# Apply migrations
+python manage.py migrate
+
+# Run server
 python manage.py runserver
+```
+
+---
+
+## 🎨 Frontend Setup (React)
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Run frontend
+npm run dev
+```
+
+---
+
+## 🌐 Open Application
+
+```text
+http://localhost:5173
+```
+
+---
+
+## 🔌 API Endpoint
+
+```
+GET /api/books/search/?q=your_query
+```
+
+Example:
+
+```
+http://127.0.0.1:8000/api/books/search/?q=science
+```
+
+---
+
+## 🧠 How It Works
+
+1. User enters a query
+2. Query is converted into embeddings
+3. FAISS searches for closest matches
+4. Top results are returned
+5. XAI explains relevance of each result
+
+---
+
+## 🚀 Future Improvements
+
+* 📚 Real book cover API integration
+* 🤖 LLM-based explanations
+* 🌐 Deployment (Vercel + Render)
+* 📈 Advanced ranking & filtering
+
+---
+
+## 👨‍💻 Author
+
+**Vidhan Mishra**
+
+---
+
+## ⭐ Note
+
+This project demonstrates practical implementation of:
+
+* Retrieval-Augmented Search (RAG)
+* Vector Databases (FAISS)
+* Explainable AI (XAI)
+* Full-stack integration (Django + React)
+
+---
