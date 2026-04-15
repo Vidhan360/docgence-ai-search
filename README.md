@@ -34,7 +34,7 @@ DOCGENCE is an AI-powered semantic book search system that uses vector embedding
 2. User query is also converted into embedding
 3. FAISS finds nearest vectors (similar books)
 4. Results are ranked by similarity score
-5. Explainable AI provides reasoning for matches
+5. Explainable AI provides reasoning for matches (USP)
 
 ---
 
