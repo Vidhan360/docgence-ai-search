@@ -44,7 +44,7 @@ docgence-ai-search/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/docgence-ai-search.git
+git clone https://github.com/Vidhan360/docgence-ai-search.git
 cd docgence-ai-search
 ```
 
