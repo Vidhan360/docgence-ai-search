@@ -1,27 +1,27 @@
 import { useState } from "react";
 import "./App.css";
 
+const covers = [
+  "https://images.unsplash.com/photo-1512820790803-83ca734da794",
+  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+  "https://images.unsplash.com/photo-1495446815901-a7297e633e8d",
+  "https://images.unsplash.com/photo-1519681393784-d120267933ba",
+  "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
+  "https://images.unsplash.com/photo-1476275466078-4007374efbbe",
+  "https://images.unsplash.com/photo-1455885666463-9757b5a7a56a",
+  "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+  "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
+];
+
 function App() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [expanded, setExpanded] = useState({}); // 🔥 track read more
+  const [expanded, setExpanded] = useState({}); 
 
-  // 🔥 FETCH BOOK COVER
-  const getBookCover = async (title) => {
-    try {
-      const res = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`
-      );
-      const data = await res.json();
-
-      return (
-        data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail ||
-        "https://via.placeholder.com/200x300?text=No+Cover"
-      );
-    } catch {
-      return "https://via.placeholder.com/200x300?text=No+Cover";
-    }
+  const getRandomCover = (index) => {
+    return covers[index % covers.length] + "?w=200&h=300&fit=crop";
   };
 
   const handleSearch = async () => {
@@ -36,12 +36,10 @@ function App() {
       );
       const data = await res.json();
 
-      const updated = await Promise.all(
-        (data.results || []).map(async (book) => {
-          const cover = await getBookCover(book.title);
-          return { ...book, cover };
-        })
-      );
+      const updated = (data.results || []).map((book, index) => ({
+        ...book,
+        cover: getRandomCover(index),
+      }));
 
       setResults(updated);
     } catch (err) {
@@ -52,7 +50,7 @@ function App() {
     setLoading(false);
   };
 
-  // 🔥 TOGGLE READ MORE
+  // 🔥 TOGGLE FUNCTION
   const toggleReadMore = (index) => {
     setExpanded((prev) => ({
       ...prev,
@@ -74,7 +72,6 @@ function App() {
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {/* LOADING */}
       {loading && (
         <div className="grid">
           {[...Array(6)].map((_, i) => (
@@ -83,7 +80,6 @@ function App() {
         </div>
       )}
 
-      {/* RESULTS */}
       <div className="grid">
         {results.map((book, index) => {
           const isExpanded = expanded[index];
@@ -93,30 +89,37 @@ function App() {
               <img src={book.cover} alt="book" />
 
               <div className="card-content">
-                <h3>#{index + 1} {book.title}</h3>
+                <h3>
+                  #{index + 1} {book.title}
+                </h3>
 
-                {/* 🔥 DESCRIPTION WITH TOGGLE */}
+                {/* 🔥 DESCRIPTION */}
                 <p>
                   {isExpanded
                     ? book.description
-                    : book.description.slice(0, 120) + "..."}
+                    : book.description?.slice(0, 120) + "..."}
                 </p>
 
-                <button
-                  onClick={() => toggleReadMore(index)}
-                  style={{
-                    border: "none",
-                    background: "none",
-                    color: "#8e2de2",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                    marginTop: "5px"
-                  }}
-                >
-                  {isExpanded ? "Show Less" : "Read More"}
-                </button>
+                {/* 🔥 READ MORE BUTTON */}
+                {book.description && book.description.length > 120 && (
+                  <button
+                    onClick={() => toggleReadMore(index)}
+                    style={{
+                      border: "none",
+                      background: "none",
+                      color: "#8e2de2",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      marginTop: "5px",
+                    }}
+                  >
+                    {isExpanded ? "Show Less" : "Read More"}
+                  </button>
+                )}
 
-                <div className="score">⭐ {book.score.toFixed(3)}</div>
+                <div className="score">
+                  ⭐ {book.score?.toFixed(3)}
+                </div>
 
                 <div className="reason">{book.reason}</div>
               </div>
