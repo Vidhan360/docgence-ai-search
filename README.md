@@ -110,6 +110,14 @@ http://127.0.0.1:8000/api/books/search/?q=science
 
 ---
 
+## 🧪 Sample Queries
+
+- science books
+- emotional novels
+- history of humans
+
+The system returns semantically relevant books with similarity scores and explanations.
+
 ## 🧠 How It Works
 
 1. User enters a query
@@ -117,6 +125,10 @@ http://127.0.0.1:8000/api/books/search/?q=science
 3. FAISS searches for closest matches
 4. Top results are returned
 5. XAI explains relevance of each result
+
+---
+
+## Screenshots are added in the Repo
 
 ---
 
